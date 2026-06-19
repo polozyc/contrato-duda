@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Contrato de Permanência Afetiva</title>
+<style>
+  @font-face {
+    font-family: 'Fraunces';
+    src: local('Georgia');
+  }
+
+  :root{
+    --paper: #F4EEDF;
+    --paper-deep: #ECE3CC;
+    --ink: #2A241C;
+    --ink-soft: #54493A;
+    --wine: #7A1F2B;
+    --wine-deep: #5C1620;
+    --gold: #A87C2E;
+    --gold-light: #C9A85C;
+    --line: rgba(42,36,28,0.18);
+  }
+
+  *{ box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+  html,body{
+    margin:0; padding:0;
+    background: var(--paper-deep);
+    color: var(--ink);
+    font-family: 'Iowan Old Style','Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  }
+
+  body{
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(168,124,46,0.08), transparent 40%),
+      radial-gradient(circle at 90% 85%, rgba(122,31,43,0.06), transparent 45%);
+    padding: 28px 14px 80px;
+  }
+
+  .sheet{
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--paper);
+    position: relative;
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 0 #fff inset, 0 30px 60px -25px rgba(42,36,28,0.45), 0 6px 18px -10px rgba(42,36,28,0.3);
+    padding: 0;
+  }
+
+  .sheet::before{
+    content:"";
+    position:absolute; inset: 10px;
+    border: 1.5px solid var(--gold-light);
+    pointer-events:none;
+  }
+  .sheet::after{
+    content:"";
+    position:absolute; inset: 14px;
+    border: 1px solid var(--line);
+    pointer-events:none;
+  }
+
+  .inner{
+    position:relative;
+    padding: 46px 34px 40px;
+  }
+
+  @media (min-width: 640px){
+    .inner{ padding: 64px 64px 56px; }
+  }
+
+  .eyebrow{
+    text-align:center;
+    letter-spacing: 0.32em;
+    font-size: 10.5px;
+    color: var(--wine);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 18px;
+    font-family: Georgia, serif;
+  }
+
+  .title{
+    text-align:center;
+    font-size: 30px;
+    line-height: 1.18;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+  .title em{ font-style: italic; color: var(--wine-deep); }
+
+  @media (min-width:640px){ .title{ font-size: 38px; } }
+
+  .subtitle{
+    text-align:center;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 22px;
+  }
+
+  .rule{
+    height:1px;
+    background: linear-gradient(90deg, transparent, var(--gold) 18%, var(--gold) 82%, transparent);
+    opacity: 0.55;
+    margin: 22px 0;
+  }
+
+  .parties{
+    display:flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 26px 0 8px;
+  }
+  @media (min-width:560px){
+    .parties{ flex-direction: row; align-items:center; justify-content: center; gap: 18px;}
+  }
+
+  .party{
+    flex:1;
+    text-align:center;
+    padding: 16px 10px;
+    border: 1px dashed var(--line);
+    background: rgba(255,255,255,0.25);
+  }
+  .party .label{
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .party .name{
+    font-size: 17px;
+    color: var(--wine-deep);
+  }
+
+  .and{
+    text-align:center;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 13px;
+    flex: 0 0 auto;
+  }
+
+  .lead{
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ink);
+    text-align: justify;
+    margin: 20px 0;
+  }
+  .lead .drop{
+    float:left;
+    font-family: Georgia, serif;
+    font-size: 52px;
+    line-height: 0.78;
+    padding: 6px 8px 0 0;
+    color: var(--wine);
+  }
+
+  .clauses{
+    margin-top: 8px;
+  }
+
+  .clause{
+    display:flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .clause:last-child{ border-bottom: 1px solid var(--line); }
+
+  .clause .num{
+    flex: 0 0 auto;
+    width: 34px;
+    font-size: 12px;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding-top: 2px;
+  }
+
+  .clause .body{ flex:1; }
+  .clause h3{
+    margin: 0 0 6px;
+    font-size: 15px;
+    color: var(--wine-deep);
+    font-weight: 600;
+  }
+  .clause p{
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.68;
+    color: var(--ink);
+    text-align: justify;
+  }
+
+  .highlight-box{
+    margin: 28px 0;
+    padding: 22px;
+    background: var(--wine);
+    background: linear-gradient(160deg, var(--wine), var(--wine-deep));
+    color: #F4EEDF;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 14px 28px -16px rgba(92,22,32,0.55);
+  }
+  .highlight-box .sum{
+    font-size: 32px;
+    letter-spacing: 0.02em;
+    margin: 4px 0 2px;
+    font-weight: 400;
+  }
+  @media (min-width:640px){ .highlight-box .sum{ font-size: 40px; } }
+  .highlight-box .sum em{ font-style: normal; color: var(--gold-light); }
+  .highlight-box .cap{
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    opacity: 0.85;
+  }
+  .highlight-box .fine{
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 10px;
+    opacity: 0.9;
+  }
+
+  .terms-extra .clause p i{ color: var(--ink-soft); }
+
+  .highlight-box-betrayal{
+    margin-top: -10px;
+    background: linear-gradient(160deg, #3A322A, #221D17);
+    box-shadow: 0 14px 28px -16px rgba(34,29,23,0.5);
+  }
+  .highlight-box-betrayal .cap{ color: var(--gold-light); }
+  .highlight-box-betrayal .sum em{ color: #E7C77A; }
+
+  /* SIGNATURE SECTION */
+  .sign-section{
+    margin-top: 38px;
+  }
+  .sign-heading{
+    text-align:center;
+    margin-bottom: 4px;
+  }
+  .sign-heading .eyebrow{ margin-bottom: 8px; }
+  .sign-heading p{
+    text-align:center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0 0 26px;
+  }
+
+  .signer-block{
+    margin-bottom: 30px;
+    padding-bottom: 8px;
+  }
+
+  .signer-name{
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+  }
+  .signer-name .tag{
+    font-size: 9px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    background: rgba(255,255,255,0.4);
+  }
+  .signer-name .tag.signed{
+    background: var(--wine);
+    color: var(--paper);
+    border-color: var(--wine);
+  }
+
+  .pad-wrap{
+    position: relative;
+    background: #FBF8EF;
+    border: 1px solid var(--line);
+    box-shadow: inset 0 1px 4px rgba(42,36,28,0.08);
+  }
+
+  canvas.pad{
+    display:block;
+    width: 100%;
+    height: 160px;
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  .pad-baseline{
+    position:absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 34px;
+    height: 1px;
+    background: var(--line);
+    pointer-events:none;
+  }
+
+  .pad-placeholder{
+    position:absolute;
+    left: 16px;
+    bottom: 38px;
+    font-size: 12px;
+    font-style: italic;
+    color: rgba(84,73,58,0.4);
+    pointer-events:none;
+    transition: opacity 0.15s;
+  }
+
+  .pad-x{
+    position:absolute;
+    left: 16px;
+    bottom: 18px;
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+  }
+
+  .pad-controls{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    margin-top: 8px;
+    gap: 10px;
+  }
+
+  .pad-meta{
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .btn{
+    font-family: inherit;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 9px 16px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .btn:hover{ background: var(--ink); color: var(--paper); }
+  .btn:active{ transform: scale(0.97); }
+
+  .btn-clear{
+    border-color: var(--line);
+    color: var(--ink-soft);
+  }
+  .btn-clear:hover{ background: var(--ink-soft); border-color: var(--ink-soft); color: var(--paper); }
+
+  .btn-confirm{
+    border-color: var(--wine);
+    color: var(--wine-deep);
+    font-weight: 600;
+  }
+  .btn-confirm:hover{ background: var(--wine); border-color: var(--wine); color: var(--paper); }
+  .btn-confirm:disabled{
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .btn-confirm:disabled:hover{ background: transparent; color: var(--ink); }
+
+  .confirmed-mark{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 11.5px;
+    color: var(--wine-deep);
+  }
+  .confirmed-mark .dot{
+    width: 7px; height:7px; border-radius: 50%;
+    background: var(--wine);
+    flex: 0 0 auto;
+  }
+
+  .date-line{
+    text-align:center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 36px 0 6px;
+  }
+
+  .seal-row{
+    display:flex;
+    justify-content:center;
+    margin-top: 18px;
+  }
+
+  .seal{
+    width: 86px; height: 86px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, var(--wine), var(--wine-deep) 70%);
+    box-shadow: 0 8px 16px -6px rgba(92,22,32,0.5), inset 0 -3px 6px rgba(0,0,0,0.25), inset 0 3px 6px rgba(255,255,255,0.12);
+    display:flex; align-items:center; justify-content:center;
+    color: var(--gold-light);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-align:center;
+    line-height: 1.4;
+    position: relative;
+    opacity: 0;
+    transform: scale(0.6) rotate(-12deg);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+  .seal.active{ opacity: 1; transform: scale(1) rotate(-8deg); }
+  .seal::before{
+    content:"";
+    position:absolute; inset:6px;
+    border: 1px solid rgba(201,168,92,0.5);
+    border-radius:50%;
+  }
+
+  .footer-note{
+    text-align:center;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    opacity: 0.65;
+    margin-top: 30px;
+    line-height: 1.6;
+  }
+
+  .status-banner{
+    max-width: 720px;
+    margin: 0 auto 18px;
+    text-align:center;
+    font-size: 12.5px;
+    color: var(--wine-deep);
+    letter-spacing: 0.02em;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, height 0.4s ease;
+  }
+  .status-banner.show{
+    opacity: 1;
+    height: auto;
+    padding: 10px 14px;
+    background: rgba(122,31,43,0.08);
+    border: 1px solid rgba(122,31,43,0.2);
+  }
+
+  .reset-link{
+    display:block;
+    text-align:center;
+    margin-top: 22px;
+    font-size: 10.5px;
+    color: var(--ink-soft);
+    opacity: 0.5;
+    text-decoration: underline;
+    cursor: pointer;
+    background:none; border:none; font-family:inherit;
+  }
+  .reset-link:hover{ opacity: 0.9; }
+
+</style>
+</head>
+<body>
+
+<div class="status-banner" id="statusBanner"></div>
+
+<div class="sheet">
+  <div class="inner">
+
+    <div class="eyebrow">Pacto Particular &amp; Vinculante</div>
+    <h1 class="title">Contrato de<br><em>Permanência Afetiva</em></h1>
+    <div class="subtitle">lavrado por livre, plena e apaixonada vontade das partes</div>
+
+    <div class="rule"></div>
+
+    <div class="parties">
+      <div class="party">
+        <div class="label">Primeira Parte</div>
+        <div class="name">Yan Polo Coloda</div>
+      </div>
+      <div class="and">&amp;</div>
+      <div class="party">
+        <div class="label">Segunda Parte</div>
+        <div class="name">Maria Eduarda<br>Oliveira Filgueiras</div>
+      </div>
+    </div>
+
+    <p class="lead"><span class="drop">P</span>elo presente instrumento particular, as partes acima identificadas, doravante denominadas em conjunto "o Casal", resolvem, de comum acordo, formalizar as cláusulas e condições abaixo, reconhecendo que o amor, embora não se meça em dinheiro, merece aqui uma garantia simbólica de compromisso e cuidado mútuo.</p>
+
+    <div class="clauses">
+      <div class="clause">
+        <div class="num">I.</div>
+        <div class="body">
+          <h3>Do Objeto</h3>
+          <p>O presente contrato tem por objeto estabelecer uma penalidade para a parte que, unilateralmente e por vontade própria, decidir colocar fim ao relacionamento amoroso ora existente entre as partes.</p>
+        </div>
+      </div>
+
+      <div class="clause">
+        <div class="num">II.</div>
+        <div class="body">
+          <h3>Da Penalidade</h3>
+          <p>Aquele(a) que terminar o relacionamento primeiro compromete-se, em caráter simbólico e de boa-fé, a pagar à outra parte a quantia de R$ 10.000.000,00 (dez milhões de reais), como reconhecimento do tempo, carinho e dedicação investidos na relação.</p>
+        </div>
+      </div>
+
+      <div class="clause">
+        <div class="num">III.</div>
+        <div class="body">
+          <h3>Da Exceção</h3>
+          <p>Não se aplica a penalidade do Artigo II em caso de decisão mútua e consensual de término, tomada em comum acordo entre as partes, sem que se configure qualquer das hipóteses agravantes previstas no Artigo IV.</p>
+        </div>
+      </div>
+
+      <div class="clause">
+        <div class="num">IV.</div>
+        <div class="body">
+          <h3>Da Cláusula Agravante por Infidelidade</h3>
+          <p>Caso o término do relacionamento decorra de traição comprovada por qualquer das partes, a penalidade prevista no Artigo II será agravada em R$ 500.000,00 (quinhentos mil reais) adicionais, totalizando R$ 10.500.000,00 (dez milhões e quinhentos mil reais) devidos pela parte infiel à parte traída, em razão da quebra de confiança e da dor moral causada.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="highlight-box">
+      <div class="cap">Valor da Cláusula Penal</div>
+      <div class="sum">R$ <em>10.000.000,00</em></div>
+      <div class="fine">devidos por quem desistir primeiro do "nós"</div>
+    </div>
+
+    <div class="highlight-box highlight-box-betrayal">
+      <div class="cap">Agravante por Traição</div>
+      <div class="sum">+ R$ <em>500.000,00</em></div>
+      <div class="fine">somados aos 10 milhões, totalizando R$ 10.500.000,00</div>
+    </div>
+
+    <div class="clauses terms-extra">
+      <div class="clause">
+        <div class="num">V.</div>
+        <div class="body">
+          <h3>Da Vigência</h3>
+          <p>Este contrato entra em vigor na data de sua assinatura por ambas as partes e permanece válido enquanto durar o relacionamento, podendo ser revisto a qualquer momento, de comum acordo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"></div>
+
+    <!-- SIGNATURE SECTION -->
+    <div class="sign-section">
+      <div class="sign-heading">
+        <div class="eyebrow">Assinaturas das Partes</div>
+        <p>toque ou arraste o dedo na linha abaixo para assinar</p>
+      </div>
+
+      <!-- Signer 1 -->
+      <div class="signer-block">
+        <div class="signer-name">
+          <span>Yan Polo Coloda</span>
+          <span class="tag" id="tag1">pendente</span>
+        </div>
+        <div class="pad-wrap">
+          <canvas class="pad" id="pad1"></canvas>
+          <div class="pad-placeholder" id="ph1">assine aqui</div>
+          <div class="pad-baseline"></div>
+          <div class="pad-x">X</div>
+        </div>
+        <div class="pad-controls">
+          <button class="btn btn-clear" data-clear="1">limpar</button>
+          <button class="btn btn-confirm" data-confirm="1" disabled>confirmar assinatura</button>
+        </div>
+        <div class="confirmed-mark" id="confirm1" style="display:none;"></div>
+      </div>
+
+      <!-- Signer 2 -->
+      <div class="signer-block">
+        <div class="signer-name">
+          <span>Maria Eduarda Oliveira Filgueiras</span>
+          <span class="tag" id="tag2">pendente</span>
+        </div>
+        <div class="pad-wrap">
+          <canvas class="pad" id="pad2"></canvas>
+          <div class="pad-placeholder" id="ph2">assine aqui</div>
+          <div class="pad-baseline"></div>
+          <div class="pad-x">X</div>
+        </div>
+        <div class="pad-controls">
+          <button class="btn btn-clear" data-clear="2">limpar</button>
+          <button class="btn btn-confirm" data-confirm="2" disabled>confirmar assinatura</button>
+        </div>
+        <div class="confirmed-mark" id="confirm2" style="display:none;"></div>
+      </div>
+
+      <div class="date-line" id="dateLine"></div>
+
+      <div class="seal-row">
+        <div class="seal" id="seal">SELADO<br>COM<br>AMOR</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      As assinaturas são salvas neste navegador.<br>
+      Documento sem valor jurídico — valor sentimental incalculável.
+    </div>
+
+    <button class="reset-link" id="resetAll">reiniciar contrato (apaga as duas assinaturas)</button>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'contrato_amor_v1';
+
+  function todayLabel(){
+    const d = new Date();
+    const meses = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    return `${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+  }
+
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch(e){ return {}; }
+  }
+  function saveState(state){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  let state = loadState();
+
+  function setupPad(id){
+    const canvas = document.getElementById('pad' + id);
+    const ctx = canvas.getContext('2d');
+    const placeholder = document.getElementById('ph' + id);
+    const confirmBtn = document.querySelector(`[data-confirm="${id}"]`);
+    const clearBtn = document.querySelector(`[data-clear="${id}"]`);
+    const tag = document.getElementById('tag' + id);
+    const confirmedMark = document.getElementById('confirm' + id);
+
+    let drawing = false;
+    let hasInk = false;
+    let dpr = window.devicePixelRatio || 1;
+
+    function resize(){
+      const rect = canvas.getBoundingClientRect();
+      const prevDrawing = canvas.toDataURL ? canvas.toDataURL() : null;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+      ctx.lineWidth = 2.1;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = '#2A241C';
+    }
+    resize();
+
+    function getPos(e){
+      const rect = canvas.getBoundingClientRect();
+      const point = e.touches ? e.touches[0] : e;
+      return {
+        x: point.clientX - rect.left,
+        y: point.clientY - rect.top
+      };
+    }
+
+    function start(e){
+      e.preventDefault();
+      drawing = true;
+      const p = getPos(e);
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      if(!hasInk){
+        hasInk = true;
+        placeholder.style.opacity = '0';
+        confirmBtn.disabled = false;
+      }
+    }
+    function move(e){
+      if(!drawing) return;
+      e.preventDefault();
+      const p = getPos(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+    function end(){
+      drawing = false;
+    }
+
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
+    canvas.addEventListener('touchstart', start, {passive:false});
+    canvas.addEventListener('touchmove', move, {passive:false});
+    canvas.addEventListener('touchend', end);
+
+    clearBtn.addEventListener('click', function(){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      hasInk = false;
+      placeholder.style.opacity = '1';
+      confirmBtn.disabled = true;
+      tag.textContent = 'pendente';
+      tag.classList.remove('signed');
+      confirmedMark.style.display = 'none';
+      confirmedMark.innerHTML = '';
+      delete state['signer' + id];
+      saveState(state);
+      updateSeal();
+    });
+
+    confirmBtn.addEventListener('click', function(){
+      if(!hasInk) return;
+      const dataUrl = canvas.toDataURL('image/png');
+      const when = new Date().toISOString();
+      state['signer' + id] = { dataUrl, when };
+      saveState(state);
+      tag.textContent = 'assinado';
+      tag.classList.add('signed');
+      const dt = new Date(when);
+      confirmedMark.style.display = 'flex';
+      confirmedMark.innerHTML = `<span class="dot"></span> assinado em ${dt.toLocaleDateString('pt-BR')} às ${dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`;
+      flashStatus(`${id === '1' ? 'Yan' : 'Maria Eduarda'} assinou o contrato.`);
+      updateSeal();
+    });
+
+    // restore if already signed
+    const saved = state['signer' + id];
+    if(saved && saved.dataUrl){
+      const img = new Image();
+      img.onload = function(){
+        ctx.drawImage(img, 0, 0, canvas.width / dpr, canvas.height / dpr);
+      };
+      img.src = saved.dataUrl;
+      hasInk = true;
+      placeholder.style.opacity = '0';
+      confirmBtn.disabled = false;
+      tag.textContent = 'assinado';
+      tag.classList.add('signed');
+      const dt = new Date(saved.when);
+      confirmedMark.style.display = 'flex';
+      confirmedMark.innerHTML = `<span class="dot"></span> assinado em ${dt.toLocaleDateString('pt-BR')} às ${dt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`;
+    }
+
+    window.addEventListener('resize', function(){
+      dpr = window.devicePixelRatio || 1;
+      // keep simple: do not auto-redraw on resize to avoid distortion complexity
+    });
+  }
+
+  function updateSeal(){
+    const seal = document.getElementById('seal');
+    const bothSigned = state.signer1 && state.signer2;
+    seal.classList.toggle('active', !!bothSigned);
+    document.getElementById('dateLine').textContent = bothSigned
+      ? `Contrato celebrado e selado em ${todayLabel()}.`
+      : '';
+    if(bothSigned){
+      flashStatus('Contrato selado por ambas as partes. 💍');
+    }
+  }
+
+  function flashStatus(msg){
+    const banner = document.getElementById('statusBanner');
+    banner.textContent = msg;
+    banner.classList.add('show');
+    clearTimeout(window._statusTimeout);
+    window._statusTimeout = setTimeout(()=>{
+      banner.classList.remove('show');
+    }, 3200);
+  }
+
+  setupPad('1');
+  setupPad('2');
+  updateSeal();
+
+  document.getElementById('resetAll').addEventListener('click', function(){
+    if(confirm('Tem certeza? Isso vai apagar as duas assinaturas salvas neste navegador.')){
+      localStorage.removeItem(STORAGE_KEY);
+      location.reload();
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
